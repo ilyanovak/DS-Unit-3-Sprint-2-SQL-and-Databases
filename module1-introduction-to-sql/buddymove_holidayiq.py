@@ -23,11 +23,13 @@ if __name__ == "__main__":
 
     QUERY = "CREATE TABLE review ('User Id' varchar(255),'Sports' INT,'Religious' INT,'Nature' INT,'Theatre' INT,'Shopping' INT,'Picnic' INT)"
     curs.execute(QUERY)
+    conn.commit()
  
     df.to_sql('review', con=conn, if_exists='replace')
 
     QUERY = "SELECT * FROM review"
     curs.execute(QUERY)
+    conn.commit()
     result = curs.fetchall()
     for i in result:
         print(i)
@@ -39,7 +41,8 @@ if __name__ == "__main__":
     print(result)
 
     print('\nHow many users who reviewed at least 100 Nature in the category also reviewed at least 100 in the Shopping category?')
-    QUERY = "SELECT count('User Id') FROM review WHERE 'Nature' >= 100 AND 'Shopping' >= 100"
+    QUERY = "SELECT count('User Id') FROM review WHERE Nature >= 100 AND Shopping >= 100"
+    # QUERY = "SELECT Nature FROM review"
     curs.execute(QUERY)
     result = curs.fetchall()
     print(result)
