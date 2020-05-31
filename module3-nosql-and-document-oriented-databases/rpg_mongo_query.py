@@ -50,4 +50,5 @@ for filename in rpg_json_list:
     df_rpg = pd.read_json(JSON_FILEPATH)
     str_rpg = df_rpg.to_json()
     dict_rpg = json.loads(str_rpg)
+    dict_rpg['_id'] = filename
     collection.insert_one(dict_rpg)
